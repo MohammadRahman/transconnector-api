@@ -1,0 +1,24 @@
+{
+  "name": "office",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "geolib": "^3.3.4",
+    "timezone-js": "^0.4.13",
+    "tz-lookup": "^6.1.25"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/timezone-js": "^0.0.31",
+    "@types/tz-lookup": "^6.1.0"
+  }
+}

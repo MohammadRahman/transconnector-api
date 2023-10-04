@@ -1,0 +1,43 @@
+version: '3'
+networks:
+  transnetwork:
+    driver: bridge
+services:
+  office:
+   build:
+    context: .
+    dockerfile: ./apps/office/Dockerfile
+    target: development
+   command: yarn start:dev office
+   env_file:
+    - ./apps/office/.env
+   ports:
+     - '3009:3009'
+   volumes:
+     - .:/usr/src/app
+   networks:
+     - transnetwork
+  officertl:
+   build:
+    context: .
+    dockerfile: ./apps/officertl/Dockerfile
+    target: development
+   command: yarn start:dev officertl
+   env_file:
+    - ./apps/officertl/.env
+   ports:
+     - '4200:4200'
+   volumes:
+     - .:/usr/src/app
+   networks:
+     - transnetwork
+  postgres:
+   image: postgres
+   env_file:
+    - .env
+   ports:
+    - '5432:5432'
+   environment:
+     POSTGRES_DB: office
+   networks:
+     - transnetwork
