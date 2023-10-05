@@ -16,4 +16,7 @@ export class RelationalOfficeService {
     const country = new CountryRtl(createCountry);
     return await this.countryRepository.create(country);
   }
+  async getCountry() {
+    return await this.countryRepository.find({});
+  }
 }

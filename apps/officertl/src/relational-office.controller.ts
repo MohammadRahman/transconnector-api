@@ -10,7 +10,11 @@ export class RelationalOfficeController {
   async getOffices() {
     return await this.relationalOfficeService.getOffices();
   }
-  @Post('office')
+  @Get('country')
+  async getCountry() {
+    return await this.relationalOfficeService.getCountry();
+  }
+  @Post('country')
   async createCountry(@Body() createCountry: any) {
     return await this.relationalOfficeService.createCountry(createCountry);
   }
