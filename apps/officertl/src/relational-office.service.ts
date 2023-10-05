@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { OfficeRtlRepository } from './repository/officeRtl.repository';
 import { CountryRtlRepository } from './repository/countryRtl.repository';
+import { CountryRtl } from './models/conutry.entity';
 
 @Injectable()
 export class RelationalOfficeService {
@@ -10,5 +11,9 @@ export class RelationalOfficeService {
   ) {}
   async getOffices() {
     return await this.officeRepository.find({});
+  }
+  async createCountry(createCountry: any) {
+    const country = new CountryRtl(createCountry);
+    return await this.countryRepository.create(country);
   }
 }
