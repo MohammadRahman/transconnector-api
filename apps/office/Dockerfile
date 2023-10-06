@@ -7,8 +7,6 @@ COPY yarn.lock ./
 COPY tsconfig.json tsconfig.json
 COPY nest-cli.json nest-cli.json
 
-
-
 COPY apps/office apps/office
 COPY libs libs
 
