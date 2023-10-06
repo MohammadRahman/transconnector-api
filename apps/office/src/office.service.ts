@@ -6,8 +6,8 @@ import {
 import { CreateOfficeDto } from './dto/create-office.dto';
 import { Office } from './models/office.entity';
 import { CountryDto } from './dto/country.dto';
-import { Country } from './models/country.entity';
-import { PRIVATE } from '@app/common';
+import { Country } from '../../../libs/common/src/models/country.entity';
+import { COUNTRIES, HelpersService, PRIVATE } from '@app/common';
 import { getDistance } from 'geolib';
 import { OfficeRepository } from './repository/office.repository';
 import { CountryRepository } from './repository/country.repository';
@@ -18,6 +18,7 @@ export class OfficeService {
   constructor(
     private readonly officeRepository: OfficeRepository,
     private readonly countryRepository: CountryRepository,
+    private readonly helperService: HelpersService,
   ) {}
 
   async create(createOfficeDto: CreateOfficeDto) {
@@ -35,7 +36,7 @@ export class OfficeService {
   }
 
   async deleteOffice(name: string) {
-    const isAuthorized = this.validateDeleteAuthorization(name);
+    const isAuthorized = this.helperService.validateDeleteAuthorization(name);
     if (isAuthorized) {
       return { message: 'Not authorized' };
     }
@@ -76,13 +77,7 @@ export class OfficeService {
         localtime = currentUtcTime.toLocaleString('en-US', {
           timeZone: timezone,
         });
-        console.log(localtime);
       }
-      // console.log('Timezone', timezone);
-      // const currentUtcTime = new Date();
-      // const localTime = currentUtcTime.toLocaleString('en-US', {
-      //   timeZone: timezone,
-      // });
       return {
         name: country.name,
         city: country.city,
@@ -91,6 +86,9 @@ export class OfficeService {
       };
     });
     return officesWithDetails;
+  }
+  async uploadSampleCountry() {
+    return await this.helperService.generateCountries(this.countryRepository);
   }
   private async validateCreateOfficeDto(createCountryDto: CountryDto) {
     try {
@@ -120,11 +118,5 @@ export class OfficeService {
       return;
     }
     throw new UnprocessableEntityException('Can not perform delete operation.');
-  }
-  private validateDeleteAuthorization(name: string) {
-    const formatedName = name.replace(' ', '').toLowerCase();
-    return PRIVATE.find((d) =>
-      d.name.replace(' ', '').toLowerCase().includes(formatedName),
-    );
   }
 }

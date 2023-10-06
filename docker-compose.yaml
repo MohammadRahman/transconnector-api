@@ -17,20 +17,6 @@ services:
      - .:/usr/src/app
    networks:
      - transnetwork
-  officertl:
-   build:
-    context: .
-    dockerfile: ./apps/officertl/Dockerfile
-    target: development
-   command: yarn start:dev officertl
-   env_file:
-    - ./apps/officertl/.env
-   ports:
-     - '4200:4200'
-   volumes:
-     - .:/usr/src/app
-   networks:
-     - transnetwork
   postgres:
    image: postgres
    env_file:

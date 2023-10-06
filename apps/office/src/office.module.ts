@@ -1,16 +1,17 @@
 import { Module } from '@nestjs/common';
 import { OfficeController } from './office.controller';
 import { OfficeService } from './office.service';
-import { DatabaseModule } from '@app/common';
+import { DatabaseModule, HelpersModule } from '@app/common';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
 import { CountryRepository } from './repository/country.repository';
 import { OfficeRepository } from './repository/office.repository';
 import { Office } from './models/office.entity';
-import { Country } from './models/country.entity';
+import { Country } from '../../../libs/common/src/models/country.entity';
 
 @Module({
   imports: [
+    HelpersModule,
     DatabaseModule,
     DatabaseModule.forFeature([Office, Country]),
     ConfigModule.forRoot({

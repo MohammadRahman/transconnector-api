@@ -2,7 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { AbstractRepository } from '@app/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { EntityManager, Repository } from 'typeorm';
-import { Country } from '../models/country.entity';
+import { Country } from '../../../../libs/common/src/models/country.entity';
 
 @Injectable()
 export class CountryRepository extends AbstractRepository<Country> {

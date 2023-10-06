@@ -55,7 +55,15 @@ export class OfficeController {
   async getCountries() {
     return await this.officeService.getCountry();
   }
-
+  @ApiTags('country')
+  @Get('country/sample-data-upload')
+  @ApiResponse({
+    status: 201,
+    description: 'Sample country data uploaded',
+  })
+  async uploadSampleCountryData() {
+    return await this.officeService.uploadSampleCountry();
+  }
   @ApiTags('country')
   @Post('country')
   @ApiResponse({
