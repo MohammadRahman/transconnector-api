@@ -1,23 +1,15 @@
-FROM node:alpine as development
+FROM node:alpine As development
 WORKDIR /usr/src/app
 
 COPY package.json ./
 COPY yarn.lock ./
-
 COPY tsconfig.json tsconfig.json
 COPY nest-cli.json nest-cli.json
-
 COPY apps/office apps/office
 COPY libs libs
 
-# RUN cd apps/office && yarn
-
 RUN yarn -r
-# RUN yarn build office
-# COPY . .
-
-RUN yarn build office
-
+RUN yarn build
 
 FROM node:alpine as production
 ARG NODE_ENV=production
