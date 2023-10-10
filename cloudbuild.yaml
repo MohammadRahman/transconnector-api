@@ -1,0 +1,15 @@
+steps:
+  # Service-1
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      [
+        'build',
+        '-t',
+        'europe-west3-docker.pkg.dev/transconnector-401517/office/production',
+        '-f',
+        'apps/office/Dockerfile',
+        '.',
+      ]
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      ['push', 'europe-west3-docker.pkg.dev/transconnector-401517/office/production']
