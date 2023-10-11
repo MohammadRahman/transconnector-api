@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: office
+  name: office
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: office
+  template:
+    metadata:
+      labels:
+        app: office
+    spec:
+      containers:
+      - image: europe-west3-docker.pkg.dev/transconnector-401517/office/production
+        name: office
