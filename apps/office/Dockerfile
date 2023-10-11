@@ -4,12 +4,15 @@ WORKDIR /usr/src/app
 COPY package.json ./
 COPY yarn.lock ./
 COPY tsconfig.json tsconfig.json
-COPY nest-cli.json nest-cli.json
+
+RUN yarn
+
 COPY apps/office apps/office
 COPY libs libs
 
-RUN yarn -r
-RUN yarn build
+RUN cd apps/office && yarn
+
+RUN yarn build office
 
 FROM node:alpine as production
 ARG NODE_ENV=production
