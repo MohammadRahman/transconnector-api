@@ -5,7 +5,7 @@ COPY package.json ./
 COPY yarn.lock ./
 COPY tsconfig.json tsconfig.json
 COPY nest-cli.json nest-cli.json
-
+RUN yarn global add @nestjs/cli
 RUN yarn install
 
 COPY apps/office apps/office
@@ -27,5 +27,4 @@ RUN yarn install
 RUN yarn --prod
 
 COPY --from=development usr/src/app/dist ./dist
-# CMD [ "node","dist/apps/office/main" ]
 CMD ["yarn", "start:dev", "office"]
